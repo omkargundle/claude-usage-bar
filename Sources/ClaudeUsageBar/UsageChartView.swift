@@ -57,7 +57,7 @@ struct UsageChartView: View {
                     }
                 }
                 .chartXAxis {
-                    AxisMarks { value in
+                    AxisMarks(values: .automatic(desiredCount: 4)) { value in
                         AxisValueLabel(format: xAxisFormat)
                             .font(.caption2)
                         AxisGridLine()
@@ -69,6 +69,7 @@ struct UsageChartView: View {
                 ])
                 .chartLegend(.visible)
                 .frame(height: 120)
+                .padding(.top, 4)
             }
         }
     }
