@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PopoverView: View {
     @ObservedObject var service: UsageService
+    @ObservedObject var historyService: UsageHistoryService
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -15,7 +16,7 @@ struct PopoverView: View {
             }
         }
         .padding()
-        .frame(width: 280)
+        .frame(width: 340)
     }
 
     @ViewBuilder
@@ -78,6 +79,9 @@ struct PopoverView: View {
             Divider()
             ExtraUsageRow(extra: extra)
         }
+
+        Divider()
+        UsageChartView(historyService: historyService)
 
         if let error = service.lastError {
             Divider()

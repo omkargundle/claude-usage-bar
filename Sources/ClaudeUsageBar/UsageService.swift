@@ -11,9 +11,13 @@ class UsageService: ObservableObject {
     @Published var isAuthenticated = false
     @Published var isAwaitingCode = false
 
+    var historyService: UsageHistoryService?
+
     private var timer: AnyCancellable?
     private var pollingStarted = false
     private let usageEndpoint = URL(string: "https://api.anthropic.com/api/oauth/usage")!
+    private let baseInterval: TimeInterval = 60
+    private var currentInterval: TimeInterval = 60
 
     // OAuth constants
     private let clientId = "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
@@ -52,7 +56,8 @@ class UsageService: ObservableObject {
     }
 
     private func scheduleTimer() {
-        timer = Timer.publish(every: 30, on: .main, in: .common)
+        timer?.cancel()
+        timer = Timer.publish(every: currentInterval, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self, self.isAuthenticated else { return }
@@ -205,6 +210,14 @@ class UsageService: ObservableObject {
                 signOut()
                 return
             }
+            if http.statusCode == 429 {
+                let retryAfter = http.value(forHTTPHeaderField: "Retry-After")
+                    .flatMap(Double.init) ?? currentInterval
+                currentInterval = min(max(retryAfter, currentInterval * 2), 600)
+                lastError = "Rate limited — backing off to \(Int(currentInterval))s"
+                scheduleTimer()
+                return
+            }
             guard http.statusCode == 200 else {
                 lastError = "HTTP \(http.statusCode)"
                 return
@@ -213,6 +226,11 @@ class UsageService: ObservableObject {
             usage = decoded
             lastError = nil
             lastUpdated = Date()
+            historyService?.recordDataPoint(pct5h: pct5h, pct7d: pct7d)
+            if currentInterval != baseInterval {
+                currentInterval = baseInterval
+                scheduleTimer()
+            }
         } catch {
             lastError = error.localizedDescription
         }
